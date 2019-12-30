@@ -5,7 +5,7 @@ package com.ljm.api;
  */
 public interface CommonApi {
 
-    default long customerNo(String name){
+    public default long customerNo(String name){
         return -1L;
     }
 }
