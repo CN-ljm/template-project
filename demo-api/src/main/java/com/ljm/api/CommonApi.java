@@ -3,5 +3,9 @@ package com.ljm.api;
 /**
  * 公共API
  */
-public class CommonApi {
+public interface CommonApi {
+
+    default long customerNo(String name){
+        return -1L;
+    }
 }

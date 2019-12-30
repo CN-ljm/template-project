@@ -1,4 +1,4 @@
-package ljm.controller.web1;
+package com.ljm.controller.web1;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -1,4 +1,4 @@
-package ljm.config.swagger;
+package com.ljm.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
