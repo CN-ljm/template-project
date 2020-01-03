@@ -1,2 +1,9 @@
 server:
   port: 8082
+dubbo:
+  application:
+    name: demo-service-dubbo
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  scan:
+    base-packages: com.ljm.service
