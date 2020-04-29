@@ -2,12 +2,16 @@ package com.ljm.service;
 
 import com.ljm.api.CommonApi;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerCommonService {
 
-    @Reference
+    /*@Reference(group = "Common", version = "0.0.2")
+    private CommonApi commonApi;*/
+
+    @Reference(registry = "zzzkkk")
     private CommonApi commonApi;
 
     /**

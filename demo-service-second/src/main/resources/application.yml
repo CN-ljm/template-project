@@ -1,9 +1,21 @@
+
 server:
   port: 8082
 dubbo:
   application:
     name: demo-service-dubbo
   registry:
+    register: false
+    id: zk_2181
     address: zookeeper://127.0.0.1:2181
+    group: demo
+  consumer:
+    check: false
   scan:
-    base-packages: com.ljm.service
+    base-packages: com.ljm.aaa
+spring:
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true

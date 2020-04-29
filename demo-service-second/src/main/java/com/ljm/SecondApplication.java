@@ -1,14 +1,24 @@
 package com.ljm;
 
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.apache.dubbo.spring.boot.autoconfigure.DubboAutoConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * 应用启动类
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DubboAutoConfiguration.class})
+//@EnableDubbo(scanBasePackages={"com.ljm.aaa"})
 public class SecondApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(SecondApplication.class,args);
+        ConfigurableApplicationContext run = SpringApplication.run(SecondApplication.class, args);
+        SecondApplication bean = run.getBean(SecondApplication.class);
+
     }
 }
