@@ -1,9 +1,13 @@
 package com.ljm.utils;
 
+import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.security.*;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
 /**
  * @author Created by liangjiaming on 2020/4/29
@@ -16,6 +20,10 @@ public class Sha1withRSAUtil {
     private static String ALGORITHM = "RSA";
     /** 指定key的大小 */
     private static int KEYSIZE = 1024;
+
+    public static final String KEY_ALGORITHM = "RSA";
+
+    public static final String SIGNATURE_ALGORITHM = "SHA1withRSA";
 
     /**
      * 生成公私密钥对
@@ -65,6 +73,86 @@ public class Sha1withRSAUtil {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 加签
+     * @param data 数据
+     * @param privateKey 私钥
+     * @return
+     */
+    public static String sign(byte[] data, String privateKey){
+
+        try {
+            byte[] keyBytes = new BASE64Decoder().decodeBuffer(privateKey);
+
+            // 构造PKCS8EncodedKeySpec对象
+            PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
+
+            // KEY_ALGORITHM 指定的加密算法
+            KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
+
+            // 取私钥对象
+            PrivateKey priKey = keyFactory.generatePrivate(pkcs8KeySpec);
+
+            Signature sign = Signature.getInstance(SIGNATURE_ALGORITHM);
+            sign.initSign(priKey);
+            sign.update(data);
+
+            return new BASE64Encoder().encode(sign.sign());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (SignatureException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 验签
+     * @param signData 验签内容
+     * @param sign 签名
+     * @param publicKey 公钥
+     * @return
+     */
+    public static boolean verify(byte[] signData, String sign, String publicKey){
+
+        try {
+            byte[] publickey = new BASE64Decoder().decodeBuffer(publicKey);
+
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publickey);
+
+            KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
+
+            PublicKey key = keyFactory.generatePublic(keySpec);
+
+            Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
+            signature.initVerify(key);
+            signature.update(signData);
+
+            return signature.verify(new BASE64Decoder().decodeBuffer(sign));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (SignatureException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
 
     //关闭流
     private static void closeCloseable(Closeable close){

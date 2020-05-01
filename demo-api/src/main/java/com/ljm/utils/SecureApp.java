@@ -7,6 +7,6 @@ package com.ljm.utils;
  */
 public class SecureApp {
     public static void main(String[] args) {
-        Sha1withRSAUtil.generatorKeyPair("D:/0429/key/");
+        Sha1withRSAUtil.generatorKeyPair("/tmp/key/");
     }
 }
