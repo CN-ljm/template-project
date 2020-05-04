@@ -24,8 +24,9 @@ public class Hello {
     @ApiOperation("测试swagger")
     @GetMapping("/sayHello")
     public String sayHello(){
-        long customerNo = service.getCustomerNoByNames("world!");
-        return String.valueOf(customerNo);
+//        long customerNo = service.getCustomerNoByNames("world!");
+//        return String.valueOf(customerNo);
+        return "hello";
     }
 
     @ApiOperation("测试swagger")
