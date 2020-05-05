@@ -8,6 +8,9 @@ import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 /**
  * @author Created by liangjiaming on 2020/4/29
@@ -16,14 +19,20 @@ import java.security.spec.X509EncodedKeySpec;
  */
 public class Sha1withRSAUtil {
 
+    private static Logger log = Logger.getAnonymousLogger();
+
     /** 指定加密算法为RSA */
     private static String ALGORITHM = "RSA";
     /** 指定key的大小 */
-    private static int KEYSIZE = 1024;
+    private static int KEYSIZE = 512;
 
     public static final String KEY_ALGORITHM = "RSA";
 
     public static final String SIGNATURE_ALGORITHM = "SHA1withRSA";
+
+    public static final String SIGNATURE_ALGORITHM2 = "SHA256withRSA";
+
+    public static final String SIGNATURE_ALGORITHM_MD5 = "MD5withRSA";
 
     /**
      * 生成公私密钥对
@@ -94,7 +103,7 @@ public class Sha1withRSAUtil {
             // 取私钥对象
             PrivateKey priKey = keyFactory.generatePrivate(pkcs8KeySpec);
 
-            Signature sign = Signature.getInstance(SIGNATURE_ALGORITHM);
+            Signature sign = Signature.getInstance(SIGNATURE_ALGORITHM2);
             sign.initSign(priKey);
             sign.update(data);
 
@@ -132,7 +141,7 @@ public class Sha1withRSAUtil {
 
             PublicKey key = keyFactory.generatePublic(keySpec);
 
-            Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
+            Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM2);
             signature.initVerify(key);
             signature.update(signData);
 
@@ -151,6 +160,62 @@ public class Sha1withRSAUtil {
 
         return false;
 
+    }
+
+    /**
+     * 获取公钥
+     * @param path
+     * @return
+     */
+    public static String getPublicKey(String path){
+        String keyPath = path != null ? path : "/tmp/key/public.txt";
+        BufferedInputStream bis = null;
+        try {
+
+            bis = new BufferedInputStream(new FileInputStream(keyPath));
+            byte[] buffer = new byte[1024];
+            int r = -1;
+            StringBuilder sb = new StringBuilder();
+            while ((r =bis.read(buffer)) != -1) {
+                sb.append(new String(buffer, 0, r));
+            }
+            String privateKey = sb.toString();
+            return privateKey;
+
+        }catch (IOException e){
+            log.log(Level.WARNING, "获取公钥错误", e);
+        }finally {
+            closeCloseable(bis);
+        }
+        return null;
+    }
+
+    /**
+     * 获取私钥
+     * @param path
+     * @return
+     */
+    public static String getPrivateKey(String path){
+        String keyPath = path != null ? path : "/tmp/key/private.txt";
+        BufferedInputStream bis = null;
+        try {
+
+            bis = new BufferedInputStream(new FileInputStream(keyPath));
+            byte[] buffer = new byte[1024];
+            int r = -1;
+            StringBuilder sb = new StringBuilder();
+            while ((r =bis.read(buffer)) != -1) {
+                sb.append(new String(buffer, 0, r));
+            }
+            String privateKey = sb.toString();
+            return privateKey;
+
+        }catch (IOException e){
+            log.log(Level.WARNING, "获取私钥错误", e);
+        }finally {
+            closeCloseable(bis);
+        }
+        return null;
     }
 
 

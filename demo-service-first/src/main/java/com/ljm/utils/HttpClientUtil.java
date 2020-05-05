@@ -115,6 +115,7 @@ public class HttpClientUtil {
             os = connection.getOutputStream();
             //请求
             os.write(JSONObject.toJSONString(param).getBytes("UTF-8"));
+            is = connection.getInputStream();
             if (connection.getResponseCode() == 200) {
                 is = connection.getInputStream();
                 br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
@@ -125,6 +126,8 @@ public class HttpClientUtil {
                 }
             }
             res = sb.toString();
+            System.out.println("返回码：" + connection.getResponseCode());
+            System.out.println("返回信息：" + connection.getResponseMessage());
             log.info("返回结果【{}】", res);
         } catch (MalformedURLException e) {
             e.printStackTrace();

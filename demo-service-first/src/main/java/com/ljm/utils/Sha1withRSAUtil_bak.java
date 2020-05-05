@@ -14,7 +14,7 @@ import sun.misc.BASE64Encoder;
 /**
  * 加签、验签工具类
  */
-public class Sha1withRSAUtil {
+public class Sha1withRSAUtil_bak {
     /** 指定加密算法为RSA */
     private static String ALGORITHM = "RSA";
     /** 指定key的大小 */
