@@ -9,15 +9,15 @@ import java.io.IOException;
  */
 public class SecureApp {
     public static void main(String[] args) throws IOException {
-//        Sha1withRSAUtil.generatorKeyPair("/tmp/key/");
+        Sha1withRSAUtil.generatorKeyPair("D:/key");
 
-        byte[] data = "name=aaa".getBytes();
+        /*byte[] data = "name=aaa".getBytes();
         //加签
-        String sign = Sha1withRSAUtil.sign(data, Sha1withRSAUtil.getPrivateKey(null));
+        String sign = Sha1withRSAUtil.sign(data, Sha1withRSAUtil.getPrivateKey("D:/key/private.txt"));
         System.out.println("签名是：" + sign);
         //验签
         data = "name=aaa".getBytes();
-        boolean verify = Sha1withRSAUtil.verify(data, sign, Sha1withRSAUtil.getPublicKey(null));
-        System.out.println("验签结果是：" + verify);
+        boolean verify = Sha1withRSAUtil.verify(data, sign, Sha1withRSAUtil.getPublicKey("D:/key/public.txt"));
+        System.out.println("验签结果是：" + verify);*/
     }
 }

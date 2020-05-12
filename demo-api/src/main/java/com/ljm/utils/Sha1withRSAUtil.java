@@ -8,6 +8,7 @@ import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -63,10 +64,10 @@ public class Sha1withRSAUtil {
             oos = new ObjectOutputStream(new FileOutputStream(file.getPath()+"/public"));
             oos.writeObject(publicKey);
             fos = new FileOutputStream(file.getPath() +"/private.txt");
-            fos.write((new BASE64Encoder()).encode(privateKey.getEncoded()).getBytes());
+            fos.write(Base64.getEncoder().encode(privateKey.getEncoded()));
             fos.flush();
             fos = new FileOutputStream(file.getPath() +"/public.txt");
-            fos.write((new BASE64Encoder()).encode(publicKey.getEncoded()).getBytes());
+            fos.write(Base64.getEncoder().encode(publicKey.getEncoded()));
 
             oos.close();
             oos.close();
@@ -92,7 +93,7 @@ public class Sha1withRSAUtil {
     public static String sign(byte[] data, String privateKey){
 
         try {
-            byte[] keyBytes = new BASE64Decoder().decodeBuffer(privateKey);
+            byte[] keyBytes = Base64.getDecoder().decode(privateKey);
 
             // 构造PKCS8EncodedKeySpec对象
             PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
@@ -109,8 +110,6 @@ public class Sha1withRSAUtil {
 
             return new BASE64Encoder().encode(sign.sign());
 
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (InvalidKeySpecException e) {
@@ -133,7 +132,7 @@ public class Sha1withRSAUtil {
     public static boolean verify(byte[] signData, String sign, String publicKey){
 
         try {
-            byte[] publickey = new BASE64Decoder().decodeBuffer(publicKey);
+            byte[] publickey = Base64.getDecoder().decode(publicKey);
 
             X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publickey);
 
