@@ -1,5 +1,6 @@
 package com.ljm;
 
+import com.ljm.service.Handle;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.apache.dubbo.spring.boot.autoconfigure.DubboAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class SecondApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(SecondApplication.class, args);
         SecondApplication bean = run.getBean(SecondApplication.class);
+
+        Handle h = run.getBean(Handle.class);
+
+        System.out.println(h.getClass() == Handle.class);
 
     }
 }

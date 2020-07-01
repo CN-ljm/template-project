@@ -21,3 +21,8 @@ dubbo:
     address: zookeeper://127.0.0.1:2181
 
 debug: true
+
+spring:
+  main:
+    lazy-initialization: true
+

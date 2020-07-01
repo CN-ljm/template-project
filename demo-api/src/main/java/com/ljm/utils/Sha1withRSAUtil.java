@@ -94,7 +94,7 @@ public class Sha1withRSAUtil {
 
         try {
             byte[] keyBytes = Base64.getDecoder().decode(privateKey);
-
+//            byte[] keyBytes = privateKey.getBytes();
             // 构造PKCS8EncodedKeySpec对象
             PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
 

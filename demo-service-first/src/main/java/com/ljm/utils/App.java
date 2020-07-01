@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public class App {
     public static void main(String[] args) throws Exception {
 
-        String imagePath = "aaa/bbb.jpg";
+        /*String imagePath = "aaa/bbb.jpg";
         boolean isManaualCheck = false;
         String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String suffix = imagePath.substring(imagePath.lastIndexOf("."));
@@ -38,13 +38,22 @@ public class App {
         LocalDate bTime = LocalDate.parse(fileName.substring(2,10), DateTimeFormatter.ofPattern("yyyyMMdd"));
         System.out.println(date);
         System.out.println(imageFileName);
-        System.out.println(bTime.format(DateTimeFormatter.ofPattern("yyyyMMdd")));
+        System.out.println(bTime.format(DateTimeFormatter.ofPattern("yyyyMMdd")));*/
 
         /*String aa = "aaa.jpg";
         String substring = aa.substring(aa.lastIndexOf("."));
         System.out.println(substring);
         String type = substring.substring(1);
         System.out.println(type);*/
+
+        LocalDate date1 = LocalDate.of(2020, 6, 2);
+        long interval = date1.toEpochDay() - LocalDate.now().toEpochDay();
+        System.out.println(interval);
+
+        BigDecimal aa = BigDecimal.ZERO;
+        BigDecimal bb = new BigDecimal(11.11);
+        System.out.println(aa.add(bb));
+
     }
 }
 
