@@ -1,5 +1,6 @@
 package com.ljm.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -18,9 +19,10 @@ import java.util.logging.Logger;
  * @title 加签、验签工具类
  * @Desc 用于HTTP请求产生签名和验证签名
  */
+@Slf4j
 public class Sha1withRSAUtil {
 
-    private static Logger log = Logger.getAnonymousLogger();
+//    private static Logger log = Logger.getAnonymousLogger();
 
     /** 指定加密算法为RSA */
     private static String ALGORITHM = "RSA";
@@ -182,7 +184,7 @@ public class Sha1withRSAUtil {
             return privateKey;
 
         }catch (IOException e){
-            log.log(Level.WARNING, "获取公钥错误", e);
+            log.error( "获取公钥错误", e);
         }finally {
             closeCloseable(bis);
         }
@@ -210,9 +212,97 @@ public class Sha1withRSAUtil {
             return privateKey;
 
         }catch (IOException e){
-            log.log(Level.WARNING, "获取私钥错误", e);
+            log.error("获取私钥错误", e);
         }finally {
             closeCloseable(bis);
+        }
+        return null;
+    }
+
+    /**
+     * 加载PEM文件形式私钥，私钥格式应该为 PKCS8
+     * @param keyPath
+     * @return
+     */
+    public static PrivateKey loadPEMPKCS8PrivateKey(String keyPath) {
+        String strPrivateKey = "";
+        BufferedReader privateKey = null;
+        try {
+            privateKey = new BufferedReader(new FileReader(keyPath));
+            String line = "";
+            while((line = privateKey.readLine()) != null){
+                strPrivateKey += line;
+            }
+            privateKey.close();
+            strPrivateKey = strPrivateKey.replace("-----BEGIN PRIVATE KEY-----","").replace("-----END PRIVATE KEY-----","");
+
+            //获取KeyFactory，指定RSA算法
+            KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
+            //将BASE64编码的私钥字符串进行解码
+            BASE64Decoder decoder = new BASE64Decoder();
+            byte[] encodeByte = decoder.decodeBuffer(strPrivateKey);
+            //将BASE64解码后的字节数组，构造成PKCS8EncodedKeySpec对象，生成私钥对象
+            PrivateKey key = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(encodeByte));
+
+            return key;
+        } catch (IOException ioe) {
+            log.error("文件读取错误", ioe);
+        } catch (NoSuchAlgorithmException e) {
+            log.error("", e);
+        } catch (InvalidKeySpecException e) {
+            log.error("", e);
+        } finally {
+            if (privateKey != null) {
+                try {
+                    privateKey.close();
+                } catch (IOException e) {
+                    log.error("", e);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 加载PEM文件形式公钥
+     * @param keyPath
+     * @return
+     */
+    public static PublicKey loadPEMPKCS8PublicKey(String keyPath) {
+        String strPublicKey = "";
+        BufferedReader publicKey = null;
+        try {
+            publicKey = new BufferedReader(new FileReader(keyPath));
+            String line = "";
+            while((line = publicKey.readLine()) != null){
+                strPublicKey += line;
+            }
+            publicKey.close();
+            strPublicKey = strPublicKey.replace("-----BEGIN PUBLIC KEY-----","").replace("-----END PUBLIC KEY-----","");
+
+            //获取KeyFactory，指定RSA算法
+            KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
+            //将BASE64编码的公钥字符串进行解码
+            BASE64Decoder decoder = new BASE64Decoder();
+            byte[] encodeByte = decoder.decodeBuffer(strPublicKey);
+            //将BASE64解码后的字节数组，构造成X509EncodedKeySpec对象，生成公钥对象
+            PublicKey key = keyFactory.generatePublic(new X509EncodedKeySpec(encodeByte));
+
+            return key;
+        } catch (IOException ioe) {
+            log.error("文件读取错误", ioe);
+        } catch (NoSuchAlgorithmException e) {
+            log.error("", e);
+        } catch (InvalidKeySpecException e) {
+            log.error("", e);
+        } finally {
+            if (publicKey != null) {
+                try {
+                    publicKey.close();
+                } catch (IOException e) {
+                    log.error("", e);
+                }
+            }
         }
         return null;
     }

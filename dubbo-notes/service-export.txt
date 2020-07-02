@@ -1,0 +1,17 @@
+#dubbo服务导出
+三步：
+第一，前置工作，检查参数。
+第二，导出服务，导出服务到本地（JVM），导出服务等到远程。
+第三，向注册中心注册服务，用于服务发现。
+
+#相关Java类
+ServiceBean服务导出入口类，dubbo集成spring、实现spring扩展关键类。
+入口方法onApplicationEvent
+
+
+ServiceConfig.doExport
+
+
+
+
+

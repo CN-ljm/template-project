@@ -1,0 +1,33 @@
+##接口加签验签
+目的：对接口传输内容摘要进行签名，预防数据在传输过程中被篡改。
+原理：使用摘要算法对数据进行计算产生摘要，再用私钥加密产生签名（生成签名字符串），公钥验签。
+
+1.公私钥生成算法介绍：
+1.1 RSA算法生成公私钥。
+
+
+2.RSA生成公私钥方式：
+2.1 Java代码生成，代码详见：com.ljm.utils.Sha1withRSAUtil.generatorKeyPair
+2.2 使用Linux自带工具openssl生成，命令如下，默认生成的是PKCS1格式的私钥，转换成PKCS8格式更方便Java代码解析。
+生成私钥:
+openssl genrsa -out rsa_private_key.pem 2048
+
+转换成PKCS8格式：
+openssl pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM -nocrypt > rsa_private_key_pkcs8.pem
+
+用私钥生成公钥（pkcs1、pkcs8 生成的公钥是一样的）：
+openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key_2048.pub
+
+PKCS8格式私钥读取代码：com.ljm.utils.Sha1withRSAUtil.loadPEMPKCS8PrivateKey
+
+
+3.摘要生成算法介绍：
+3.1 三种常见摘要算法是sha1、sha256、MD5，sha1效率最高，MD5次之但是容易发生碰撞，sha256最安全（对安全行要求较高的一般用这个）。
+
+4.使用SHA256withRSA算法加签和验签：
+4.1 加签见代码：com.ljm.utils.Sha1withRSAUtil.sign
+4.2 验签见代码：com.ljm.utils.Sha1withRSAUtil.verify
+
+
+
+
