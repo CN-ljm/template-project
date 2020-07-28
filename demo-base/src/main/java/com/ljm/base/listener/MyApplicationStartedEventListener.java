@@ -1,5 +1,6 @@
 package com.ljm.base.listener;
 
+import com.esotericsoftware.minlog.Log;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 
@@ -11,6 +12,7 @@ import org.springframework.context.ApplicationListener;
 public class MyApplicationStartedEventListener implements ApplicationListener<ApplicationStartedEvent> {
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
-        System.out.println("MyApplicationStartedEventListener");
+        Log.debug("MyApplicationStartedEventListener");
+//        System.out.println("");
     }
 }

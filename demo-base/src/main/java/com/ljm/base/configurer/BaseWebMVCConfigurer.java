@@ -1,5 +1,6 @@
 package com.ljm.base.configurer;
 
+import com.esotericsoftware.minlog.Log;
 import com.ljm.base.fifter.MyHttpServletFilter;
 import com.ljm.base.interceptor.SignatureHandleInterceptor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -24,7 +25,8 @@ public class BaseWebMVCConfigurer implements WebMvcConfigurer {
 
     @Bean
     public FilterRegistrationBean registerFilter() {
-        System.out.println("BaseWebMVCConfigurer registerFilter");
+//        System.out.println("BaseWebMVCConfigurer registerFilter");
+        Log.debug("BaseWebMVCConfigurer registerFilter");
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new MyHttpServletFilter());
         registration.addUrlPatterns("/*");
