@@ -14,12 +14,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * 应用启动类
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,DubboAutoConfiguration.class})
 @Slf4j
+@EnableAspectJAutoProxy(proxyTargetClass=true)
 public class FirstApplication {
 
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 server:
   port: 8089
-debug: true
+debug: false
 spring:
   main:
     lazy-initialization: false
