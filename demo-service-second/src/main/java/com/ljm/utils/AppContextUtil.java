@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-@Component
+/*@Component
 public class AppContextUtil implements ApplicationContextAware {
 
     private static ApplicationContext appContext = null;
@@ -26,4 +26,4 @@ public class AppContextUtil implements ApplicationContextAware {
     public static Object getBean(String beanName){
         return getAppContext().getBean(beanName);
     }
-}
+}*/
