@@ -1,0 +1,4 @@
+问题：
+1. channel basicReject等方法 为啥不用传队列名称
+
+2. MessageConverter formMessage 方法底层原理，找到Map对象转bean的地方

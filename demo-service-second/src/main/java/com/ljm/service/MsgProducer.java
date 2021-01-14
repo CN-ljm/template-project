@@ -1,5 +1,6 @@
 package com.ljm.service;
 
+import com.ljm.dto.MessageVo;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Created by liangjiaming on 2021/1/6
@@ -23,8 +26,16 @@ public class MsgProducer {
     private RabbitTemplate rabbitTemplate;
 
     public void sendMsg(String msg) throws UnsupportedEncodingException {
-        byte[] bytes = msg.getBytes("utf-8");
-        rabbitTemplate.convertAndSend("direct.test","test.key", bytes);
+
+        MessageVo vo = new MessageVo();
+        vo.setId(System.currentTimeMillis());
+        vo.setName("Jackson序列化消息");
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("id",System.currentTimeMillis());
+        map.put("name", "Jackson序列化消息Map");
+
+        rabbitTemplate.convertAndSend("direct.test","test.key", map);
     }
 
 }

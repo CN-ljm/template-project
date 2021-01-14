@@ -1,12 +1,13 @@
 package com.ljm.service;
 
+import com.alibaba.fastjson.JSON;
+import com.esotericsoftware.minlog.Log;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.GetResponse;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageProperties;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.QueueInformation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.Connection;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -24,6 +25,7 @@ import java.util.List;
  * @Desc
  */
 @Service
+@Slf4j
 public class RabbitMQMessageService {
 
     /*@Autowired
@@ -55,7 +57,11 @@ public class RabbitMQMessageService {
 
         // 每次消费第二条消息
         GetResponse targetRes = responseList.get(1);
-        rabbitTemplate.convertAndSend("direct.test", "test.key", targetRes.getBody());
+        ObjectMapper mapper = new ObjectMapper();
+        log.info("死信消息队列配置：{}", mapper.writeValueAsString(targetRes.getProps()));
+//        rabbitTemplate.convertAndSend("direct.test", "test.key", targetRes.getBody());
+        log.info("死信消息队列配置--消息对象类型Type：{}", targetRes.getProps().getType());
+        log.info("死信消息队列配置--消息对象类型__TypeId__：{}", targetRes.getProps().getHeaders().get("__TypeId__").toString());
         channel.basicAck(targetRes.getEnvelope().getDeliveryTag(), false);
         responseList.remove(targetRes);
 

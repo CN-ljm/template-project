@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Handle {
 
-    public String handleRequest() {
+    /*public String handleRequest() {
         return "aaa";
-    }
+    }*/
 
 }
