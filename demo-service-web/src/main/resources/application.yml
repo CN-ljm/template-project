@@ -3,7 +3,7 @@ server:
   port: 8082
 dubbo:
   application:
-    name: demo-service-dubbo
+    name: demo-service-web
   registry:
     register: false
     id: zk_2181
@@ -11,8 +11,6 @@ dubbo:
     group: demo
   consumer:
     check: false
-  scan:
-    base-packages: com.ljm.aaa
 spring:
   http:
     encoding:

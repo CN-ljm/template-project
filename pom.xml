@@ -11,14 +11,14 @@
     </parent>
 
     <groupId>com.ljm.learn</groupId>
-    <artifactId>spring-dubbo-demo</artifactId>
+    <artifactId>template-project</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>demo-api</module>
         <module>demo-base</module>
-        <module>demo-service-first</module>
-        <module>demo-service-second</module>
+        <module>demo-service-provider</module>
+        <module>demo-service-web</module>
     </modules>
 
     <name>spring-dubbo-demo</name>
@@ -35,7 +35,7 @@
         <!-- web依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
