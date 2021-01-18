@@ -12,16 +12,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.ljm.learn</groupId>
-            <artifactId>demo-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ljm.learn</groupId>
-            <artifactId>demo-base</artifactId>
+            <artifactId>demo-base-web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

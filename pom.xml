@@ -14,16 +14,17 @@
     <artifactId>template-project</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
+    <name>template-project</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
+
     <modules>
         <module>demo-api</module>
         <module>demo-base</module>
+        <module>demo-base-web</module>
         <module>demo-service-provider</module>
         <module>demo-service-web</module>
     </modules>
-
-    <name>spring-dubbo-demo</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,17 +33,6 @@
     </properties>
 
     <dependencies>
-        <!-- web依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
