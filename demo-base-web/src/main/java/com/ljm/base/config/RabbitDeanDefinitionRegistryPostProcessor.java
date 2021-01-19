@@ -1,11 +1,16 @@
-package com.ljm.config;
+package com.ljm.base.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -14,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
  * @Desc
  */
 @Configuration
+@EnableConfigurationProperties(RabbitProperties.class)
 @Slf4j
 public class RabbitDeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
     @Override

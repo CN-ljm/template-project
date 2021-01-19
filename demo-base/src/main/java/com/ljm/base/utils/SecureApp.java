@@ -1,10 +1,6 @@
-package com.ljm.utils;
+package com.ljm.base.utils;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
 
 /**
  * @author Created by liangjiaming on 2020/4/29

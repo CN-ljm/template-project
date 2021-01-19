@@ -1,3 +1,4 @@
+/*
 package com.ljm.service;
 
 import com.ljm.dto.MessageVo;
@@ -14,11 +15,13 @@ import java.time.format.FormatStyle;
 import java.util.HashMap;
 import java.util.Map;
 
+*/
 /**
  * @author Created by liangjiaming on 2021/1/6
  * @title
  * @Desc
- */
+ *//*
+
 @Service
 public class MsgProducer {
 
@@ -39,3 +42,4 @@ public class MsgProducer {
     }
 
 }
+*/

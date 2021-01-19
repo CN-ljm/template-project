@@ -2,7 +2,7 @@ package com.ljm.base.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.ljm.utils.Sha1withRSAUtil;
+import com.ljm.base.utils.Sha1withRSAUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

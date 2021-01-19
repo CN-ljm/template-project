@@ -1,4 +1,4 @@
-package com.ljm.utils;
+package com.ljm.base.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import sun.misc.BASE64Decoder;
@@ -10,9 +10,6 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 /**
  * @author Created by liangjiaming on 2020/4/29
