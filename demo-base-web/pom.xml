@@ -13,6 +13,16 @@
     <!-- 集成dubbo -->
     <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo-spring-boot-starter -->
     <dependencies>
+
+        <dependency>
+            <groupId>com.ljm.learn</groupId>
+            <artifactId>demo-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ljm.learn</groupId>
+            <artifactId>demo-base</artifactId>
+        </dependency>
+
         <!-- web依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -38,13 +48,11 @@
             <version>2.9.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
         <dependency>
-            <groupId>com.ljm.learn</groupId>
-            <artifactId>demo-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ljm.learn</groupId>
-            <artifactId>demo-base</artifactId>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.7.0</version>
         </dependency>
 
     </dependencies>

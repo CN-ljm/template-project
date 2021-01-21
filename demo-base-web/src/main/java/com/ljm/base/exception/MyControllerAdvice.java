@@ -14,7 +14,7 @@ import java.util.Map;
 @ControllerAdvice
 public class MyControllerAdvice {
 
-    @ResponseBody
+    /*@ResponseBody
     @ExceptionHandler(value = Exception.class)
     public Map exceptionHandler(Exception e){
         System.out.println("异常拦截");
@@ -23,5 +23,5 @@ public class MyControllerAdvice {
         map.put("code", -1);
         map.put("msg", e.getMessage());
         return map;
-    }
+    }*/
 }
