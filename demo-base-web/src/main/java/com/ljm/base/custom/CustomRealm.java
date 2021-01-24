@@ -40,6 +40,9 @@ public class CustomRealm extends AuthorizingRealm {
 
         //获取用户信息
         String name = authenticationToken.getPrincipal().toString();
+        if (!name.equals("admin")) {
+            return null;
+        }
         log.info("登录名：{}", name);
         String password = "123456";
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(name, password, getName());

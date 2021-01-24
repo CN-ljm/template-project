@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ljm.service.CustomerCommonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,7 @@ public class Hello {
 
     @ApiOperation("测试swagger")
     @GetMapping("/sayHello")
+    @RequiresPermissions("aa")
     public String sayHello(){
 //        long customerNo = service.getCustomerNoByNames("world!");
 //        return String.valueOf(customerNo);
