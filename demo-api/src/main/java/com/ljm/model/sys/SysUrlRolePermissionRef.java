@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 
 /**
  * @author create by jiamingl on 下午10:39
- * @title URL权限配置
+ * @title URL权限配置,配再对应的角色的对应权限下
  * @desc
  */
-public class SysUrlPermissionRef implements Serializable {
+public class SysUrlRolePermissionRef implements Serializable {
 
     private static final long serialVersionUID = 3792908872128468935L;
 
