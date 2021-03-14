@@ -1,9 +1,14 @@
 package com.ljm.base.config.shiro;
 
+import com.ljm.base.service.SysUserAuthorService;
+import com.ljm.model.sys.SysUrlPermissionRef;
+import com.ljm.model.sys.SysUserPermission;
+import com.ljm.model.sys.SysUserRole;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
 import org.apache.shiro.web.servlet.AbstractShiroFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -12,6 +17,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
@@ -23,6 +29,10 @@ import java.util.StringJoiner;
 @Service
 @Slf4j
 public class PermissionsConfig {
+
+    @Autowired
+    private SysUserAuthorService authorService;
+
 
     public Map<String, String> loadFilterChainDefinitions() {
         // 权限控制
@@ -48,6 +58,16 @@ public class PermissionsConfig {
         filterChainDefinitionMap.put("/unauth", "anon");
 
         // 自定义权限
+        List<SysUrlPermissionRef> urlPermissionList = authorService.listAllUrlPermission();
+        urlPermissionList.stream().forEach(url -> {
+            SysUserPermission permission = authorService.getPermissionById(url.getPermissionId());
+            List<SysUserRole> userRoles = authorService.listARolesByPermId(permission.getId());
+            StringJoiner roles = new StringJoiner(",", "customRoles[", "]");
+            userRoles.forEach(r -> roles.add(r.getKey()));
+            // 放入到拦截链中
+            filterChainDefinitionMap.put(url.getUrl(), "customAuthc," + roles.toString() + "customPerms[" + permission.getKey() + "]");
+        });
+
         /*List<Menu> permissionList = menuMapper.selectAll();
         if (!CollectionUtils.isEmpty(permissionList)) {
             permissionList.forEach(e -> {

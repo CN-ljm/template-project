@@ -20,6 +20,8 @@ public class SysUserPermission implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
+    private String key;
+
     private String name;
 
     private String desc;

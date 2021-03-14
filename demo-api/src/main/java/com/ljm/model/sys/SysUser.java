@@ -3,7 +3,10 @@ package com.ljm.model.sys;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.ljm.enums.SysUserType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,7 +16,11 @@ import java.time.LocalDateTime;
  * @title 系统用户信息
  * @desc
  */
+
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class SysUser implements Serializable {
 
     // 反序列化版本
@@ -24,9 +31,11 @@ public class SysUser implements Serializable {
 
     private SysUserType type;
 
-    private String userName;
+    private String username;
 
     private String password;
+
+    private String name;
 
     private String phone;
 
