@@ -33,12 +33,12 @@ public class CustomRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         // 添加角色
         List<SysUserRole> userRoles = authorService.listRoleByUsername(user.getUsername());
-        Set<String> roles = userRoles.stream().map(role -> role.getKey()).collect(Collectors.toSet());
+        Set<String> roles = userRoles.stream().map(role -> role.getRoleKey()).collect(Collectors.toSet());
         simpleAuthorizationInfo.setRoles(roles);
         // 添加角色对应的权限
         List<Long> permIds = userRoles.stream().map(SysUserRole::getId).collect(Collectors.toList());
         List<SysUserPermission> sysUserPermissions = authorService.listPermissionByRoleIds(permIds);
-        Set permissions = sysUserPermissions.stream().map(SysUserPermission::getKey).collect(Collectors.toSet());
+        Set permissions = sysUserPermissions.stream().map(SysUserPermission::getPermKey).collect(Collectors.toSet());
 //        Set permissions = new HashSet();
 //        permissions.add("add");
 //        permissions.add("update");

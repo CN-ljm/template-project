@@ -63,9 +63,9 @@ public class PermissionsConfig {
             SysUserPermission permission = authorService.getPermissionById(url.getPermissionId());
             List<SysUserRole> userRoles = authorService.listARolesByPermId(permission.getId());
             StringJoiner roles = new StringJoiner(",", "customRoles[", "]");
-            userRoles.forEach(r -> roles.add(r.getKey()));
+            userRoles.forEach(r -> roles.add(r.getRoleKey()));
             // 放入到拦截链中
-            filterChainDefinitionMap.put(url.getUrl(), "customAuthc," + roles.toString() + "customPerms[" + permission.getKey() + "]");
+            filterChainDefinitionMap.put(url.getUrl(), "customAuthc," + roles.toString() + "customPerms[" + permission.getPermKey() + "]");
         });
 
         /*List<Menu> permissionList = menuMapper.selectAll();

@@ -26,11 +26,11 @@ public class SysUserRole implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    private String key;
+    private String roleKey;
 
-    private String name;
+    private String roleName;
 
-    private String desc;
+    private String roleDesc;
 
     private LocalDateTime createTime;
 

@@ -20,11 +20,11 @@ public class SysUserPermission implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    private String key;
+    private String permKey;
 
-    private String name;
+    private String permName;
 
-    private String desc;
+    private String permDesc;
 
     private LocalDateTime createTime;
 
